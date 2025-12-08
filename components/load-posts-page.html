@@ -1,0 +1,156 @@
+<!-- Load Posts Page (Initially Hidden) -->
+<div class="load-posts-page" id="loadPostsPage" style="display: flex">
+  <aside class="filter-sidebar">
+    <div class="filter-header">
+      <h3>Filter by</h3>
+      <span class="clear-all">Clear All</span>
+    </div>
+
+    <form class="filter-form">
+      <div class="filter-row">
+        <div class="filter-group">
+          <label for="filterPostDate">Post Date</label>
+          <div class="date-range-input-wrapper">
+            <input type="date" id="filterPostDate" />
+            <img
+              src="../assets/calendar_month.svg"
+              alt="Calendar"
+              class="date-range-calendar-icon"
+            />
+          </div>
+        </div>
+        <div class="filter-group">
+          <label for="filterPostId">Post Id</label>
+          <input type="text" id="filterPostId" placeholder="e.g LS00012" />
+        </div>
+      </div>
+      <div class="filter-group">
+        <label for="filterStatus">Status</label>
+        <div class="custom-dropdown" data-target="filterStatus">
+          <div class="dropdown-header" id="filterStatusHeader">
+            <span class="selected-value">Select Status</span>
+            <span class="dropdown-arrow"></span>
+          </div>
+          <div class="dropdown-list" id="filterStatusList">
+            <div class="dropdown-item" data-value="ongoing">Ongoing</div>
+            <div class="dropdown-item" data-value="accepted">Accepted</div>
+            <div class="dropdown-item" data-value="confirmed">Confirmed</div>
+            <div class="dropdown-item" data-value="completed">Completed</div>
+            <div class="dropdown-item" data-value="timeout">Timeout</div>
+          </div>
+        </div>
+      </div>
+      <div class="filter-group">
+        <label for="filterLoadingPoint">Loading Point (From)</label>
+        <input
+          type="text"
+          id="filterLoadingPoint"
+          placeholder="Enter pickup Location"
+        />
+      </div>
+      <div class="filter-group">
+        <label for="filterUnloadingPoint">Unloading Point (To)</label>
+        <input
+          type="text"
+          id="filterUnloadingPoint"
+          placeholder="Enter drop Location"
+        />
+      </div>
+      <div class="filter-group">
+        <label for="filterMaterial">Material</label>
+        <div class="custom-dropdown" data-target="filterMaterial">
+          <div class="dropdown-header" id="filterMaterialHeader">
+            <span class="selected-value">Select Material</span>
+            <span class="dropdown-arrow"></span>
+          </div>
+          <div class="dropdown-list" id="filterMaterialList">
+            <div class="dropdown-item" data-value="Bags">Bags</div>
+            <div class="dropdown-item" data-value="Boxes">Boxes</div>
+            <div class="dropdown-item" data-value="Pallets">Pallets</div>
+            <div class="dropdown-item" data-value="Coal">Coal</div>
+            <div class="dropdown-item" data-value="Iron Ore">Iron Ore</div>
+            <div class="dropdown-item" data-value="Sand">Sand</div>
+            <div class="dropdown-item" data-value="Gravel">Gravel</div>
+            <div class="dropdown-item" data-value="Steel">Steel</div>
+            <div class="dropdown-item" data-value="Cement">Cement</div>
+            <div class="dropdown-item" data-value="Fertilizer">Fertilizer</div>
+            <div class="dropdown-item" data-value="Electronics">
+              Electronics
+            </div>
+            <div class="dropdown-item" data-value="Textiles">Textiles</div>
+            <div class="dropdown-item" data-value="Machinery">Machinery</div>
+            <div class="dropdown-item" data-value="Food Items">Food Items</div>
+            <div class="dropdown-item" data-value="Other">Other</div>
+          </div>
+        </div>
+      </div>
+      <div class="filter-group">
+        <label for="filterScheduleType">Schedule Type</label>
+        <div class="custom-dropdown" data-target="filterScheduleType">
+          <div class="dropdown-header" id="filterScheduleTypeHeader">
+            <span class="selected-value">Select Schedule Type</span>
+            <span class="dropdown-arrow"></span>
+          </div>
+          <div class="dropdown-list" id="filterScheduleTypeList">
+            <div class="dropdown-item" data-value="One Stop">One Stop</div>
+            <div class="dropdown-item" data-value="Bulk Load">Bulk Load</div>
+            <div class="dropdown-item" data-value="Multiple Stops">
+              Multiple Stops
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="filter-group">
+        <label for="filterDateRange">Date Range</label>
+        <div class="date-range-input-wrapper">
+          <input
+            type="text"
+            id="filterDateRange"
+            placeholder="DD-MM-YYYY - DD-MM-YYYY"
+            readonly
+          />
+          <input type="date" id="hiddenDatePickerSidebar" />
+          <img
+            src="../assets/calendar_month.svg"
+            alt="Calendar"
+            class="date-range-calendar-icon"
+          />
+        </div>
+      </div>
+    </form>
+
+    <button class="apply-filter-button">Apply Filter</button>
+  </aside>
+
+  <section class="main-load-content">
+    <div class="tabs-and-search-container">
+      <div class="tabs">
+        <button class="tab-button active" data-tab="ongoing">
+          Ongoing Bids (3)
+        </button>
+        <!-- <button class="tab-button" data-tab="accepted">Accepted Bids (3)</button> -->
+        <button class="tab-button" data-tab="confirmed">
+          Confirmed Posts (5)
+        </button>
+        <button class="tab-button" data-tab="completed">
+          Completed Posts (30)
+        </button>
+      </div>
+      <div class="search-and-actions">
+        <div class="search-bar">
+          <input type="text" placeholder="Search..." />
+          <i class="fas fa-search search-icon"></i>
+        </div>
+        <div class="excel-icon">
+          <img src="./excel.png" alt="not available" />
+        </div>
+        <div class="filter-icon" id="filterModalToggle">
+          <img src="./assets/Frame 4960.svg" alt="Filter" />
+        </div>
+      </div>
+    </div>
+    <div class="load-posts-list" id="loadPostsList">
+      <!-- Load Post Cards will be rendered here dynamically -->
+    </div>
+  </section>
+</div>

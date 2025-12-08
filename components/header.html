@@ -1,0 +1,297 @@
+<header>
+  <div class="logo">
+    <img src="assets/logo.svg" alt="Loadsor Logo" />
+  </div>
+  <nav>
+    <ul>
+      <li><a href="#">Dashboard</a></li>
+      <li><a href="#" class="active">Load Posts</a></li>
+      <li>
+        <a href="#">Verifications <i class="fas fa-chevron-down"></i></a>
+      </li>
+      <li>
+        <a href="#">Tracking <i class="fas fa-chevron-down"></i></a>
+      </li>
+      <li>
+        <a href="#" class="header-link" id="checkChallanLink">
+          Check Challan
+        </a>
+        <!-- Check Challan Modal (Initially Hidden) -->
+      </li>
+      <li id="moreIcon">
+        <a href="#">More <i class="fas fa-chevron-down"></i></a>
+
+        <!-- More Dropdown (Initially Hidden) -->
+        <div class="more-dropdown" id="moreDropdown" style="display: none">
+          <ul class="more-dropdown-menu-list">
+            <li>
+              <img src="assets/services.svg" alt="Services" class="icon" />
+              <span class="text">Services</span>
+            </li>
+            <li>
+              <img src="assets/videos.svg" alt="Videos" class="icon" />
+              <span class="text">Videos</span>
+            </li>
+            <div class="separator-item"></div>
+
+            <li>
+              <img src="assets/faqs.svg" alt="FAQs" class="icon" />
+              <span class="text">FAQs</span>
+            </li>
+            <li>
+              <img
+                src="assets/terms.svg"
+                alt="Terms & Condition"
+                class="icon"
+              />
+              <span class="text">Terms & Conditions</span>
+            </li>
+            <li>
+              <img src="assets/privacy.svg" alt="Privacy Policy" class="icon" />
+              <span class="text">Privacy Policy</span>
+            </li>
+            <li>
+              <img src="assets/contact.svg" alt="Contact Us" class="icon" />
+              <span class="text">Contact Us</span>
+            </li>
+            <div class="separator-item"></div>
+            <li class="call-us-item">
+              <a href="tel:+917686808080">
+                Call Us
+                <img
+                  src="assets/external_link.svg"
+                  alt="External Link"
+                  class="external-link-icon"
+                />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </nav>
+  <div class="user-actions">
+    <div class="demo-button">Demo</div>
+
+    <div class="post-load-button">
+      <i class="fas fa-plus"></i>
+      Post a Load
+    </div>
+    <div class="notification-icon" id="bellIcon">
+      <img
+        src="assets/Notification.svg"
+        alt="Notifications"
+        class="bell-icon"
+      />
+      <span class="notification-count" id="notificationCount">6</span>
+
+      <!-- Bell Icon Notification Modal (Initially Hidden) -->
+      <div
+        class="notification-modal"
+        id="notificationModal"
+        style="display: none"
+      >
+        <div class="modal-body">
+          <ul class="notification-list">
+            <li>
+              <span class="icon"
+                ><img
+                  src="assets/1st.svg"
+                  alt="Notification"
+                  class="notification-icon"
+              /></span>
+              <div class="notification-content">
+                <p>
+                  Dear Sarfraz, Thank you for registration.<br />
+                  User ID: 9375610192, Password: 657788.<br />
+                  Visit loadsor.com or call 7686808080 for details.
+                </p>
+                <span class="timestamp">1m</span>
+              </div>
+            </li>
+            <li>
+              <span class="icon"
+                ><img
+                  src="assets/2nd.svg"
+                  alt="Notification"
+                  class="notification-icon"
+              /></span>
+              <div class="notification-content">
+                <p>
+                  Dear Mahesh, Vehicle number AP16TH1897 for quote <br />of
+                  ₹s.46020 has been updated on your load post id <br />
+                  LS18298. Visit loadsor.com or call 7686808080.
+                </p>
+                <span class="timestamp">25m</span>
+              </div>
+            </li>
+            <li>
+              <span class="icon"
+                ><img
+                  src="assets/3rd.svg"
+                  alt="Notification"
+                  class="notification-icon"
+              /></span>
+              <div class="notification-content">
+                <p>
+                  Dear Manisha, Your Quote against load post id <br />
+                  LS18299 has been accepted. Visit loadsor.com or call <br />
+                  7686808080 for details.
+                </p>
+                <span class="timestamp">12h</span>
+              </div>
+            </li>
+            <li>
+              <span class="icon"
+                ><img
+                  src="assets/4th.svg"
+                  alt="Notification"
+                  class="notification-icon"
+              /></span>
+              <div class="notification-content">
+                <p>
+                  Your LoadsOR credentials are :<br />
+                  User ID: 7972848396, Password: 754622 <br />
+                  Please visit loadsor.com to access your account.
+                </p>
+                <span class="timestamp">2d</span>
+              </div>
+            </li>
+            <li>
+              <span class="icon"
+                ><img
+                  src="assets/2nd.svg"
+                  alt="Notification"
+                  class="notification-icon"
+              /></span>
+              <div class="notification-content">
+                <p>
+                  Dear N Dwarakanath, A quote has been updated on<br />
+                  18-Jun-2025 3:08:29 PM on your load post id<br />
+                  LS18287. Visit loadsor.com or call 7686808080 for details.
+                </p>
+                <span class="timestamp">2d</span>
+              </div>
+            </li>
+            <li>
+              <span class="icon"
+                ><img
+                  src="assets/6th.svg"
+                  alt="Notification"
+                  class="notification-icon"
+              /></span>
+              <div class="notification-content">
+                <p>
+                  Dear N Dwarakanath, LS18306 is successfully posted.<br />
+                  We are working on your load. Visit loadsor.com or call<br />
+                  7686808080 for details.
+                </p>
+                <span class="timestamp">2d</span>
+              </div>
+            </li>
+            <li>
+              <span class="icon"
+                ><img
+                  src="assets/2nd.svg"
+                  alt="Notification"
+                  class="notification-icon"
+              /></span>
+              <div class="notification-content">
+                <p>
+                  Dear N Dwarakanath, A quote has been updated on<br />
+                  18-Jun-2025 3:08:29 PM on your load post id<br />
+                  LS18287. Visit loadsor.com or call 7686808080 for details.
+                </p>
+                <span class="timestamp">2d</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="user-profile" id="userProfile">
+      <div class="user-avatar">A</div>
+      <i class="fas fa-chevron-down"></i>
+
+      <!-- Profile Dropdown (Initially Hidden) -->
+      <div class="profile-dropdown" id="profileDropdown" style="display: none">
+        <div class="profile-dropdown-header">
+          <span>Last Login at:</span><br />
+          <span><strong>12/05/2025 (9:02 AM)</strong></span>
+        </div>
+        <ul class="dropdown-menu-list">
+          <li>
+            <img
+              src="assets/user_avatar.svg"
+              alt="User Avatar"
+              class="dropdown-avatar"
+            />
+            <div class="user-info">
+              <span class="username">My Profile</span>
+              <span class="user-detail">Jessica Smith</span>
+            </div>
+            <img src="assets/arrow_right.svg" alt="Arrow Right" class="arrow" />
+          </li>
+          <li>
+            <div class="list-item">
+              <img
+                src="assets/check_wallet.svg"
+                alt="Check Wallet"
+                class="icon"
+              />
+              <div class="box wallet">
+                <span class="text">Check Wallet</span>
+                <span class="balance">Balance: ₹100</span>
+              </div>
+            </div>
+            <img src="assets/arrow_right.svg" alt="Arrow Right" class="arrow" />
+          </li>
+          <li>
+            <div class="list-item">
+              <img src="assets/account.svg" alt="My Account" class="icon" />
+              <div class="box">
+                <span class="text">My Account</span>
+              </div>
+            </div>
+            <img src="assets/arrow_right.svg" alt="Arrow Right" class="arrow" />
+          </li>
+          <li>
+            <div class="list-item">
+              <img
+                src="assets/materials.svg"
+                alt="Preferred Material"
+                class="icon"
+              />
+              <div class="box">
+                <span class="text">Preferred Material</span>
+              </div>
+            </div>
+            <img src="assets/arrow_right.svg" alt="Arrow Right" class="arrow" />
+          </li>
+          <li>
+            <div class="list-item">
+              <img
+                src="assets/password.svg"
+                alt="Sub/Extra Login"
+                class="icon"
+              />
+              <div class="box">
+                <span class="text">Sub/Extra Login</span>
+              </div>
+            </div>
+            <img src="assets/arrow_right.svg" alt="Arrow Right" class="arrow" />
+          </li>
+          <li>
+            <div class="list-item">
+              <img src="assets/logout.svg" alt="Logout" class="icon" />
+              <div class="box">
+                <span class="text">Logout</span>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <button class="set-truck-time-button">Set Truck Time</button>
+      </div>
+    </div>
+  </div>
+</header>

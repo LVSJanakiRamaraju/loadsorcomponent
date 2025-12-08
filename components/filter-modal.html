@@ -1,0 +1,140 @@
+<!-- Filter Modal for smaller screens -->
+<div class="filter-modal-overlay" id="filterModalOverlay">
+    <!-- Hidden select elements for script.js compatibility -->
+    <select id="filterStatus" style="display: none;"></select>
+    <select id="filterMaterial" style="display: none;"></select>
+    <select id="filterScheduleType" style="display: none;"></select>
+    
+    <div class="filter-modal-content">
+        <div class="filter-modal-header">
+            <h3>Filter by</h3>
+            <button class="filter-modal-close" id="filterModalClose">&times;</button>
+        </div>
+        <div class="filter-form-grid">
+            <!-- Left Column -->
+            <div class="filter-column-left">
+                <div class="filter-form-group">
+                    <label for="modalFilterPostDate">Post Date</label>
+                    <div class="date-range-input-wrapper">
+                        <input type="date" id="modalFilterPostDate" placeholder="DD/MM/YYYY">
+                        <img src="../assets/calendar_month.svg" alt="Calendar" class="date-range-calendar-icon">
+                    </div>
+                </div>
+                <div class="filter-form-group">
+                    <label for="modalFilterStatus">Status</label>
+                    <div class="custom-dropdown" data-target="modalFilterStatus">
+                        <div class="dropdown-header" id="modalFilterStatusHeader">
+                            <span class="selected-value">Select Status</span>
+                            <span class="dropdown-arrow"></span>
+                        </div>
+                        <div class="dropdown-list" id="modalFilterStatusList">
+                            <div class="dropdown-item" data-value="">Select Status</div>
+                            <div class="dropdown-item" data-value="ongoing">Ongoing</div>
+                            <div class="dropdown-item" data-value="accepted">Accepted</div>
+                            <div class="dropdown-item" data-value="confirmed">Confirmed</div>
+                            <div class="dropdown-item" data-value="completed">Completed</div>
+                            <div class="dropdown-item" data-value="timeout">Timeout</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="filter-form-group">
+                    <label for="modalFilterLoadingPoint">Loading Point (From)</label>
+                    <input type="text" id="modalFilterLoadingPoint" placeholder="Enter pickup Location">
+                </div>
+                <div class="filter-form-group">
+                    <label for="modalFilterMaterial">Material</label>
+                    <div class="custom-dropdown" data-target="modalFilterMaterial">
+                        <div class="dropdown-header" id="modalFilterMaterialHeader">
+                            <span class="selected-value">Select Material</span>
+                            <span class="dropdown-arrow"></span>
+                        </div>
+                        <div class="dropdown-list" id="modalFilterMaterialList">
+                            <div class="dropdown-item" data-value="Bags">Bags</div>
+                            <div class="dropdown-item" data-value="Boxes">Boxes</div>
+                            <div class="dropdown-item" data-value="Pallets">Pallets</div>
+                            <div class="dropdown-item" data-value="Coal">Coal</div>
+                            <div class="dropdown-item" data-value="Iron Ore">Iron Ore</div>
+                            <div class="dropdown-item" data-value="Sand">Sand</div>
+                            <div class="dropdown-item" data-value="Gravel">Gravel</div>
+                            <div class="dropdown-item" data-value="Steel">Steel</div>
+                            <div class="dropdown-item" data-value="Cement">Cement</div>
+                            <div class="dropdown-item" data-value="Fertilizer">Fertilizer</div>
+                            <div class="dropdown-item" data-value="Electronics">Electronics</div>
+                            <div class="dropdown-item" data-value="Textiles">Textiles</div>
+                            <div class="dropdown-item" data-value="Machinery">Machinery</div>
+                            <div class="dropdown-item" data-value="Food Items">Food Items</div>
+                            <div class="dropdown-item" data-value="Other">Other</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="filter-form-group">
+                    <label for="modalFilterTruckType">Truck Type</label>
+                    <div class="custom-dropdown" data-target="modalFilterTruckType">
+                        <div class="dropdown-header" id="modalFilterTruckTypeHeader">
+                            <span class="selected-value">Select truck type</span>
+                            <span class="dropdown-arrow"></span>
+                        </div>
+                        <div class="dropdown-list" id="modalFilterTruckTypeList">
+                            <div class="dropdown-item" data-value="Mini Truck">Mini Truck</div>
+                            <div class="dropdown-item" data-value="Pickup">Pickup</div>
+                            <div class="dropdown-item" data-value="Tata Ace">Tata Ace</div>
+                            <div class="dropdown-item" data-value="14 Ft SCV">14 Ft SCV</div>
+                            <div class="dropdown-item" data-value="17 Ft SCV">17 Ft SCV</div>
+                            <div class="dropdown-item" data-value="19 Ft SCV">19 Ft SCV</div>
+                            <div class="dropdown-item" data-value="22 Ft SCV">22 Ft SCV</div>
+                            <div class="dropdown-item" data-value="5 MT Container">5 MT Container</div>
+                            <div class="dropdown-item" data-value="10 MT Container">10 MT Container</div>
+                            <div class="dropdown-item" data-value="15 MT Container">15 MT Container</div>
+                            <div class="dropdown-item" data-value="20 MT Container">20 MT Container</div>
+                            <div class="dropdown-item" data-value="32 Ft MXL">32 Ft MXL</div>
+                            <div class="dropdown-item" data-value="20 Ft Container">20 Ft Container</div>
+                            <div class="dropdown-item" data-value="40 Ft Container">40 Ft Container</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Right Column -->
+            <div class="filter-column-right">
+                <div class="filter-form-group">
+                    <label for="modalFilterPostId">Post Id</label>
+                    <input type="text" id="modalFilterPostId" placeholder="Example: LS00012">
+                </div>
+                <div class="filter-form-group">
+                    <label for="modalFilterScheduleType">Schedule Type</label>
+                    <div class="custom-dropdown" data-target="modalFilterScheduleType">
+                        <div class="dropdown-header" id="modalFilterScheduleTypeHeader">
+                            <span class="selected-value">All</span>
+                            <span class="dropdown-arrow"></span>
+                        </div>
+                        <div class="dropdown-list" id="modalFilterScheduleTypeList">
+                            <div class="dropdown-item" data-value="">All</div>
+                            <div class="dropdown-item" data-value="One Stop">One Stop</div>
+                            <div class="dropdown-item" data-value="Bulk Load">Bulk Load</div>
+                            <div class="dropdown-item" data-value="Multiple Stops">Multiple Stops</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="filter-form-group">
+                    <label for="modalFilterUnloadingPoint">Unloading Point (To)</label>
+                    <input type="text" id="modalFilterUnloadingPoint" placeholder="Enter drop Location">
+                </div>
+                <div class="filter-form-group">
+                    <label for="modalFilterRequiredTrucks">Required Trucks</label>
+                    <input type="text" id="modalFilterRequiredTrucks" placeholder="Enter Quantity (e.g. 1, 5, 10)">
+                </div>
+                <div class="filter-form-group">
+                    <label for="modalFilterDateRange">Date Range</label>
+                    <div class="date-range-input-wrapper">
+                        <input type="text" id="modalFilterDateRange" placeholder="DD-MM-YYYY - DD-MM-YYYY" readonly>
+                        <input type="date" id="hiddenDatePicker">
+                        <img src="../assets/calendar_month.svg" alt="Calendar" class="date-range-calendar-icon">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="filter-actions">
+            <button type="button" class="filter-clear-btn">Clear All</button>
+            <button type="button" class="filter-apply-btn">Apply Filter</button>
+        </div>
+    </div>
+</div>

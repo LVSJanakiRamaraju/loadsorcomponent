@@ -1,0 +1,760 @@
+<!-- Modal Overlay -->
+<div class="modal-overlay" id="modalOverlay">
+    <!-- Create Load Request Modal -->
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Create Load Request</h2>
+            <span class="close-button" id="closeModal">&times;</span>
+        </div>
+        <div class="modal-separator"></div>
+        <div class="modal-body">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="scheduleDate">Schedule Date</label>
+                    <div class="date-range-input-wrapper">
+                        <input type="date" id="scheduleDate">
+                        <img src="assets/calendar_month.svg" alt="Calendar" class="date-range-calendar-icon">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="reportingTime">Reporting Time</label>
+                    <div class="custom-dropdown" data-target="reportingTime">
+                        <div class="dropdown-header" id="reportingTimeHeader">
+                            <span class="selected-value">Select Reporting Time</span>
+                            <span class="dropdown-arrow"></span>
+                        </div>
+                        <div class="dropdown-list" id="reportingTimeList">
+                            <div class="dropdown-item" data-value="09:00 AM">09:00 AM</div>
+                            <div class="dropdown-item" data-value="10:00 AM">10:00 AM</div>
+                            <div class="dropdown-item" data-value="11:00 AM">11:00 AM</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Bidding Time</label>
+                    <div class="time-selects">
+                        <div class="custom-dropdown" data-target="biddingHrs">
+                            <div class="dropdown-header" id="biddingHrsHeader">
+                                <span class="selected-value">Select Hrs</span>
+                                <span class="dropdown-arrow"></span>
+                            </div>
+                            <div class="dropdown-list" id="biddingHrsList">
+                                <div class="dropdown-item" data-value="00">00</div>
+                                <div class="dropdown-item" data-value="01">01</div>
+                                <div class="dropdown-item" data-value="02">02</div>
+                            </div>
+                        </div>
+                        <div class="custom-dropdown" data-target="biddingMins">
+                            <div class="dropdown-header" id="biddingMinsHeader">
+                                <span class="selected-value">Select Mins</span>
+                                <span class="dropdown-arrow"></span>
+                            </div>
+                            <div class="dropdown-list" id="biddingMinsList">
+                                <div class="dropdown-item" data-value="00">00</div>
+                                <div class="dropdown-item" data-value="10">10</div>
+                                <div class="dropdown-item" data-value="20">20</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-section">
+                    <label>Schedule Type</label>
+                    <div class="toggle-buttons">
+                        <button class="toggle-button active" data-schedule-type="One Stop">
+                            <i class="fas fa-check"></i>
+                            One Stop
+                        </button>
+                        <button class="toggle-button" data-schedule-type="Bulk Load">
+                            <i class="fas fa-check"></i>
+                            Bulk Load
+                        </button>
+                        <button class="toggle-button" data-schedule-type="Multiple Stops">
+                            <i class="fas fa-check"></i>
+                            Multiple Stops
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <label>Load Post for</label>
+                    <div class="toggle-buttons">
+                        <button class="toggle-button active" data-load-post-for="My Transporters">
+                            <i class="fas fa-check"></i>
+                            My Transporters
+                        </button>
+                        <button class="toggle-button" data-load-post-for="Transporter Groups">
+                            <i class="fas fa-check"></i>
+                            Transporter Groups
+                        </button>
+                        <button class="toggle-button" data-load-post-for="All">
+                            <i class="fas fa-check"></i>
+                            All
+                        </button>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="getVehicleDetails">
+                        <label for="getVehicleDetails">Get Vehicle Details from Contract Transporter</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bulk Load Fields (Initially Hidden) -->
+            <div class="form-row dynamic-field-section bulk-load-fields" style="display: none;">
+                <div class="form-group">
+                    <label for="organizationName">Organization Name</label>
+                    <div class="custom-dropdown" data-target="organizationName">
+                        <div class="dropdown-header" id="organizationNameHeader">
+                            <span class="selected-value">Select your Organization</span>
+                            <span class="dropdown-arrow">^</span>
+                        </div>
+                        <div class="dropdown-list" id="organizationNameList">
+                            <div class="dropdown-item" data-value="">Select your Organization</div>
+                            <div class="dropdown-item" data-value="Org A">Org A</div>
+                            <div class="dropdown-item" data-value="Org B">Org B</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="preferredTransporterGroup">Preferred Transporters Group</label>
+                    <div class="custom-dropdown" data-target="preferredTransporterGroup">
+                        <div class="dropdown-header" id="preferredTransporterGroupHeader">
+                            <span class="selected-value">Select your Transporter Group</span>
+                            <span class="dropdown-arrow"></span>
+                        </div>
+                        <div class="dropdown-list" id="preferredTransporterGroupList">
+                            <div class="dropdown-item" data-value="Group X">Group X</div>
+                            <div class="dropdown-item" data-value="Group Y">Group Y</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Multiple Stops Fields (Initially Hidden) -->
+            <div class="form-section dynamic-field-section multiple-stops-fields" style="display: none;">
+                <div class="form-row loading-points-container">
+                    <div class="form-group">
+                        <label for="loadingPointMulti1">Loading Point (From)</label>
+                        <input type="text" id="loadingPointMulti1" placeholder="Enter pickup Location">
+                    </div>
+                    <div class="form-group">
+                        <label for="weightLoading1">Weight (in MT)</label>
+                        <input type="text" id="weightLoading1" placeholder="Weight">
+                    </div>
+                    <div class="form-group">
+                        <label for="unloadingPointMulti1">Unloading Point (To)</label>
+                        <input type="text" id="unloadingPointMulti1" placeholder="Enter Drop Location">
+                    </div>
+                    <div class="form-group">
+                        <label for="weightUnloading1">Weight (in MT)</label>
+                        <input type="text" id="weightUnloading1" placeholder="Weight">
+                    </div>
+                    <div class="add-more-icon">
+                        <span class="add-button">+</span>
+                    </div>
+                </div>
+                <button class="add-more-address-button">+ Add more Address</button>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="totalLoadWeight">Total Load Weight (in MT)</label>
+                        <input type="text" id="totalLoadWeight" placeholder="Select Weight">
+                    </div>
+                    <div class="form-group">
+                        <label for="weightGuarantee">Weight Guarantee (in MT)</label>
+                        <input type="text" id="weightGuarantee" placeholder="Enter Weight e.g. 7.5, 9, 10...">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Original Loading/Unloading & Material/Load Weight/Approx Value (for One Stop) -->
+            <div class="form-row one-stop-fields">
+                <div class="form-group">
+                    <label for="loadingPoint">Loading Point (From)</label>
+                    <input type="text" id="loadingPoint" placeholder="Enter pickup Location">
+                </div>
+                <div class="form-group">
+                    <label for="unloadingPoint">Unloading Point (To)</label>
+                    <input type="text" id="unloadingPoint" placeholder="Enter Drop Location">
+                </div>
+            </div>
+
+            <div class="form-row one-stop-fields material-row">
+                <div class="form-group material-field">
+                    <label for="material">Material</label>
+                    <div class="custom-dropdown" data-target="material">
+                        <div class="dropdown-header" id="materialHeader">
+                            <span class="selected-value">Select Material</span>
+                            <span class="dropdown-arrow"></span>
+                        </div>
+                        <div class="dropdown-list" id="materialList">
+                            <div class="dropdown-item" data-value="Bags">Bags</div>
+                            <div class="dropdown-item" data-value="Boxes">Boxes</div>
+                            <div class="dropdown-item" data-value="Pallets">Pallets</div>
+                            <div class="dropdown-item" data-value="Coal">Coal</div>
+                            <div class="dropdown-item" data-value="Iron Ore">Iron Ore</div>
+                            <div class="dropdown-item" data-value="Sand">Sand</div>
+                            <div class="dropdown-item" data-value="Gravel">Gravel</div>
+                            <div class="dropdown-item" data-value="Steel">Steel</div>
+                            <div class="dropdown-item" data-value="Cement">Cement</div>
+                            <div class="dropdown-item" data-value="Fertilizer">Fertilizer</div>
+                            <div class="dropdown-item" data-value="Electronics">Electronics</div>
+                            <div class="dropdown-item" data-value="Textiles">Textiles</div>
+                            <div class="dropdown-item" data-value="Machinery">Machinery</div>
+                            <div class="dropdown-item" data-value="Food Items">Food Items</div>
+                            <div class="dropdown-item" data-value="Other">Other</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group weight-value-field">
+                    <label for="loadWeight">Load Weight (in MT)</label>
+                    <div class="custom-dropdown" data-target="loadWeight">
+                        <div class="dropdown-header" id="loadWeightHeader">
+                            <span class="selected-value">Select Weight</span>
+                            <span class="dropdown-arrow"></span>
+                        </div>
+                        <div class="dropdown-list" id="loadWeightList">
+                            <div class="dropdown-item" data-value="0.5">0.5 MT</div>
+                            <div class="dropdown-item" data-value="1">1 MT</div>
+                            <div class="dropdown-item" data-value="2">2 MT</div>
+                            <div class="dropdown-item" data-value="3">3 MT</div>
+                            <div class="dropdown-item" data-value="4">4 MT</div>
+                            <div class="dropdown-item" data-value="5">5 MT</div>
+                            <div class="dropdown-item" data-value="7.5">7.5 MT</div>
+                            <div class="dropdown-item" data-value="10">10 MT</div>
+                            <div class="dropdown-item" data-value="15">15 MT</div>
+                            <div class="dropdown-item" data-value="20">20 MT</div>
+                            <div class="dropdown-item" data-value="25">25 MT</div>
+                            <div class="dropdown-item" data-value="30">30 MT</div>
+                            <div class="dropdown-item" data-value="40">40 MT</div>
+                            <div class="dropdown-item" data-value="50">50 MT</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group weight-value-field">
+                    <label for="approxValue">Approx Value of the Load (₹)</label>
+                    <input type="text" id="approxValue" placeholder="Enter the Amount">
+                </div>
+            </div>
+
+            <div class="form-row truck-row">
+                <div class="form-group truck-field">
+                    <label for="truckType">Truck Type</label>
+                    <div class="custom-dropdown" data-target="truckType">
+                        <div class="dropdown-header" id="truckTypeHeader">
+                            <span class="selected-value">Select truck type</span>
+                            <span class="dropdown-arrow"></span>
+                        </div>
+                        <div class="dropdown-list" id="truckTypeList">
+                            <div class="dropdown-item" data-value="Open Truck">Open Truck</div>
+                            <div class="dropdown-item" data-value="Container">Container</div>
+                            <div class="dropdown-item" data-value="Flatbed">Flatbed</div>
+                            <div class="dropdown-item" data-value="Trailer">Trailer</div>
+                            <div class="dropdown-item" data-value="Tanker">Tanker</div>
+                            <div class="dropdown-item" data-value="Refrigerated Truck">Refrigerated Truck</div>
+                            <div class="dropdown-item" data-value="5 MT Container">5 MT Container</div>
+                            <div class="dropdown-item" data-value="7.5 MT Container">7.5 MT Container</div>
+                            <div class="dropdown-item" data-value="10 MT Container">10 MT Container</div>
+                            <div class="dropdown-item" data-value="20 MT Container">20 MT Container</div>
+                            <div class="dropdown-item" data-value="32 MT Container">32 MT Container</div>
+                            <div class="dropdown-item" data-value="Multi-Axle Trailer">Multi-Axle Trailer</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group truck-field">
+                    <label for="requiredTrucks">Required Trucks</label>
+                    <input type="text" id="requiredTrucks" placeholder="Enter Quantity (e.g. 1, 5, 10)">
+                </div>
+                <div class="form-group payment-field">
+                    <label for="paymentTerms">Payment Terms</label>
+                    <!-- Hidden select for script.js compatibility -->
+                    <select id="paymentTerms" style="display: none;">
+                        <option value="">Select Payment Terms</option>
+                        <option value="advance">100% Advance</option>
+                        <option value="loading">100% On Loading</option>
+                        <option value="delivery">100% On Delivery</option>
+                        <option value="50-50">50% Advance + 50% On Delivery</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <div class="custom-dropdown" data-target="paymentTerms">
+                        <div class="dropdown-header" id="paymentTermsHeader">
+                            <span class="selected-value">Select your Payment Terms</span>
+                            <span class="dropdown-arrow"></span>
+                        </div>
+                        <div class="dropdown-list" id="paymentTermsList">
+                            <div class="dropdown-item" data-value="Full Freight Paid within 8 days">Full Freight Paid within 8 days</div>
+                            <div class="dropdown-item" data-value="50% Upfront, 50% on Delivery">50% Upfront, 50% on Delivery</div>
+                            <div class="dropdown-item" data-value="other">Other</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Conditional Payment Terms Field (Initially Hidden) -->
+            <div class="form-row conditional-payment-terms" style="display: none;">
+                <div class="form-group full-width">
+                    <label for="specifyPaymentTerms">Specify your Payment Terms</label>
+                    <input type="text" id="specifyPaymentTerms" placeholder="e.g., 50% upfront, 50% on completion">
+                </div>
+            </div>
+
+            <div class="form-group full-width">
+                <label for="description">Description (Optional)</label>
+                <textarea id="description" placeholder="Write any specification or instructions if you want to give..."></textarea>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="cancel-button">Cancel</button>
+            <button class="create-button" id="createLoadRequestButton" data-mode="create">Create</button>
+        </div>
+    </div>
+</div>
+
+<!-- Accept Bid Confirmation Modal -->
+<div class="modal-overlay" id="acceptBidConfirmationModalOverlay" style="display: none;">
+    <div class="modal-content small-modal">
+        <div class="modal-body text-center">
+            <img src="/assets/question_mark.svg" alt="Question Mark Icon" class="modal-icon">
+            <p class="confirmation-text"></p>
+        </div>
+        <div class="small-modal-footer center-buttons">
+            <button class="cancel-button" id="cancelAcceptBid">Cancel</button>
+            <button class="create-button" id="confirmAcceptBid">Accept Bid</button>
+        </div>
+    </div>
+</div>
+
+<!-- Accept Bid Success Modal -->
+<div class="modal-overlay" id="acceptBidSuccessModalOverlay" style="display: none;">
+    <div class="modal-content small-modal">
+        <div class="modal-body text-center">
+            <img src="/assets/green_check.svg" alt="Check Mark Icon" class="modal-icon success">
+            <p class="success-message"></p>
+            <p class="note-message">Note: Load Post has been moved to Accepted Bids.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Extend Bidding Duration Modal -->
+<div class="modal-overlay" id="extendBidTimeModalOverlay" style="display: none;">
+    <div class="modal-content small-modal extended-modal">
+        <div class="modal-header">
+            <h2>Extend Bidding Duration</h2>
+            <span class="close-button" id="closeExtendBidTimeModal">&times;</span>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label>Bidding Time</label>
+                <div class="time-selects">
+                    <div class="custom-dropdown" data-target="extendBiddingHrs">
+                        <div class="dropdown-header" id="extendBiddingHrsHeader">
+                            <span class="selected-value">Select Hrs</span>
+                            <span class="dropdown-arrow"></span>
+                        </div>
+                        <div class="dropdown-list" id="extendBiddingHrsList">
+                            <div class="dropdown-item" data-value="00">00</div>
+                            <div class="dropdown-item" data-value="01">01</div>
+                            <div class="dropdown-item" data-value="02">02</div>
+                            <div class="dropdown-item" data-value="03">03</div>
+                            <div class="dropdown-item" data-value="04">04</div>
+                            <div class="dropdown-item" data-value="05">05</div>
+                            <div class="dropdown-item" data-value="06">06</div>
+                            <div class="dropdown-item" data-value="07">07</div>
+                            <div class="dropdown-item" data-value="08">08</div>
+                            <div class="dropdown-item" data-value="09">09</div>
+                            <div class="dropdown-item" data-value="10">10</div>
+                            <div class="dropdown-item" data-value="11">11</div>
+                            <div class="dropdown-item" data-value="12">12</div>
+                        </div>
+                    </div>
+                    <div class="custom-dropdown" data-target="extendBiddingMins">
+                        <div class="dropdown-header" id="extendBiddingMinsHeader">
+                            <span class="selected-value">Select Mins</span>
+                            <span class="dropdown-arrow"></span>
+                        </div>
+                        <div class="dropdown-list" id="extendBiddingMinsList">
+                            <div class="dropdown-item" data-value="00">00</div>
+                            <div class="dropdown-item" data-value="15">15</div>
+                            <div class="dropdown-item" data-value="30">30</div>
+                            <div class="dropdown-item" data-value="45">45</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="small-modal-footer center-buttons">
+            <button class="cancel-button" id="cancelExtendBidTime">Cancel</button>
+            <button class="create-button" id="confirmExtendBidTime">Extend Bid Time</button>
+        </div>
+    </div>
+</div>
+
+<!-- View All Bids Modal -->
+<div class="modal-overlay" id="viewAllBidsModalOverlay" style="display: none;">
+    <div class="modal-content large-modal">
+        <div class="modal-header">
+            <h2 id="viewAllBidsModalTitle">Quotations Received for Load Post #LS18058</h2>
+            <span class="close-button" id="closeViewAllBidsModal">&times;</span>
+        </div>
+        <div class="modal-body">
+            <div class="bids-table-full">
+                <div class="bid-full-row header">
+                    <span>Date & Time</span>
+                    <span>Transport Company</span>
+                    <span>Transporter Name</span>
+                    <span>Mobile Number</span>
+                    <span>Load Weight</span>
+                    <span>Quoted Amount</span>
+                    <span>Action</span>
+                </div>
+                <div id="viewAllBidsTableBody" class="bids-table-body">
+                    <!-- Dynamic bid rows will go here -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Confirm Load Post Deletion Modal -->
+<div class="modal-overlay" id="confirmDeleteModalOverlay" style="display: none;">
+    <div class="modal-content large-modal-delete">
+        <div class="modal-header">
+            <h2>Confirm Load Post Deletion</h2>
+            <span class="close-button" id="closeDeleteModal">&times;</span>
+        </div>
+        <div class="modal-body">
+            <p class="modal-section-title">Review Details</p>
+            <div class="review-details-table">
+                <div class="review-row header">
+                    <span>Post Id</span>
+                    <span>Loading Point (From)</span>
+                    <span>Unloading Point (To)</span>
+                    <span>Distance</span>
+                    <span>Schedule Date</span>
+                    <span>Weight (MT)</span>
+                    <span>Req Trucks</span>
+                    <span>Material</span>
+                    <span>Truck Type</span>
+                </div>
+                <div id="deleteReviewDetailsBody" class="review-row-value">
+                    <!-- Load post details will be dynamically inserted here -->
+                </div>
+            </div>
+
+            <p class="modal-section-title">Reason for Deletion (Optional)</p>
+            <div class="form-group full-width">
+                <textarea id="deleteReason" placeholder="Enter your reason for deleting this load post."></textarea>
+            </div>
+        </div>
+        <div class="modal-footer center-buttons">
+            <button class="cancel-button" id="cancelDelete">Cancel</button>
+            <button class="create-button delete-button" id="confirmDelete">Confirm Delete</button>
+        </div>
+    </div>
+</div>
+
+<!-- Confirm Load Fulfillment Modal -->
+<div class="modal-overlay" id="confirmFulfillModalOverlay" style="display: none;">
+    <div class="modal-content large-modal-delete">
+        <div class="modal-header">
+            <h2>Confirm Load Fulfillment</h2>
+            <span class="close-button" id="closeFulfillModal">&times;</span>
+        </div>
+        <div class="modal-body">
+            <p class="modal-section-title">Review Details</p>
+            <div class="review-details-table">
+                <div class="review-row header">
+                    <span>Post Id</span>
+                    <span>Loading Point (From)</span>
+                    <span>Unloading Point (To)</span>
+                    <span>Distance</span>
+                    <span>Schedule Date</span>
+                    <span>Weight (MT)</span>
+                    <span>Req Trucks</span>
+                    <span>Material</span>
+                    <span>Truck Type</span>
+                </div>
+                <div id="fulfillReviewDetailsBody">
+                    <!-- Load post details will be dynamically inserted here -->
+                </div>
+            </div>
+
+            <div class="form-row manage-by-section">
+                <div class="form-group" style="flex-grow: 0;">
+                    <label class="form-label">Managed By</label>
+                    <div class="toggle-buttons small-toggle">
+                        <button type="button" class="toggle-button active" data-value="self">
+                            <i class="fas fa-check"></i>
+                            Loadsor
+                        </button>
+                        <button type="button" class="toggle-button" data-value="other">
+                            <i class="fas fa-check"></i>
+                            Other
+                        </button>
+                    </div>
+                </div>
+                <div class="form-group transport" style="flex-grow: 0;">
+                    <label class="form-label">Transporter Name</label>
+                    <input type="text" placeholder="Enter your Transporter Name" id="fulfillTransporterName">
+                </div>
+                <div class="form-group transport" style="flex-grow: 0;">
+                    <label class="form-label">Mobile Number</label>
+                    <div class="input-with-icon">
+                        <span class="icon">+91 </span>
+                        <input type="text" placeholder="&nbsp; Enter your mobile number" id="fulfillMobileNumber">
+                    </div>
+                </div>
+            </div>
+
+            <p class="modal-section-title">Notes (Optional)</p>
+            <div class="form-group full-width">
+                <textarea id="fulfillNotes" placeholder="Write any instructions or notes here..."></textarea>
+            </div>
+        </div>
+        <div class="modal-footer center-buttons">
+            <button class="cancel-button" id="cancelFulfill">Cancel</button>
+            <button class="create-button" id="confirmFulfill">Confirm Fulfillment</button>
+        </div>
+    </div>
+</div>
+
+<!-- Hidden select elements for script.js compatibility (placed outside modals to avoid layout interference) -->
+<select id="reportingTime" style="display: none;"></select>
+<select id="biddingHrs" style="display: none;"></select>
+<select id="biddingMins" style="display: none;"></select>
+<select id="organizationName" style="display: none;"></select>
+<select id="preferredTransporterGroup" style="display: none;"></select>
+<select id="material" style="display: none;"></select>
+<select id="loadWeight" style="display: none;"></select>
+<select id="truckType" style="display: none;"></select>
+<select id="extendBiddingHrs" style="display: none;"></select>
+<select id="extendBiddingMins" style="display: none;"></select>
+<textarea id="description" style="display: none;"></textarea>
+
+<!-- Truck Status Modal -->
+<div class="modal-overlay truck-status-modal-overlay" id="truckStatusModalOverlay" style="display: none;">
+    <div class="modal-content large-modal">
+        <div class="modal-header">
+            <h2>Truck Status</h2>
+            <span class="close-button" id="closeTruckStatusModal">&times;</span>
+        </div>
+        <div class="modal-body">
+            <div class="truck-status-form-section">
+                <div class="truck-status-form-row">
+                    <div class="filter-group">
+                        <label>Truck In/Out<span class="required">*</span></label>
+                        <div class="custom-dropdown" data-target="truckInOut">
+                            <div class="dropdown-header" id="truckInOutHeader">
+                                <span class="selected-value">IN</span>
+                                <span class="dropdown-arrow"></span>
+                            </div>
+                            <div class="dropdown-list" id="truckInOutList">
+                                <div class="dropdown-item" data-value="IN">IN</div>
+                                <div class="dropdown-item" data-value="OUT">OUT</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filter-group">
+                        <label for="truckStatusDatePicker">Date</label>
+                        <div class="date-range-input-wrapper-filter">
+                            <input type="date" id="truckStatusDatePicker" placeholder="DD/MM/YYYY">
+                            <img src="../assets/calendar_month.svg" alt="Calendar" class="date-range-calendar-icon">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="truck-status-records-section" id="truckStatusRecordsSection" style="display: none;">
+                <div class="bids-table-full">
+                    <div class="bid-full-row header">
+                        <span>Vehicle No</span>
+                        <span>Added Date</span>
+                        <span>Truck Status</span>
+                        <span>Added By</span>
+                    </div>
+                    <div id="truckStatusTableBody" class="bids-table-body">
+                        <!-- Records will be populated here -->
+                    </div>
+                </div>
+                <div class="truck-status-empty-state" id="truckStatusEmptyState" style="display: none;">
+                    No Records Has Been Added.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Vehicle Details Modal -->
+<div class="modal-overlay-vehicle-details" id="vehicleDetailsModalOverlay" style="display: none;">
+    <div class="vehicle-details-modal-content">
+        <div class="vehicle-details-modal-header">
+            <h2>Vehicle Details</h2>
+            <button class="close-button" id="closeVehicleDetailsModal">&times;</button>
+        </div>
+        <div class="vehicle-details-modal-body">
+            <div class="vehicle-details-grid">
+                <div class="vehicle-detail-item">
+                    <span class="vehicle-detail-label">Vehicle Number:</span>
+                    <span class="vehicle-detail-value" id="vehicleNumber">MH34BG5094</span>
+                </div>
+                <div class="vehicle-detail-item">
+                    <span class="vehicle-detail-label">Vehicle Status:</span>
+                    <span class="vehicle-detail-value" id="vehicleStatus">Active</span>
+                </div>
+                <div class="vehicle-detail-item">
+                    <span class="vehicle-detail-label">Owner Name:</span>
+                    <span class="vehicle-detail-value" id="ownerName">Jalendar Singh</span>
+                </div>
+                <div class="vehicle-detail-item">
+                    <span class="vehicle-detail-label">Registration Date:</span>
+                    <span class="vehicle-detail-value" id="registrationDate">26th April 2019</span>
+                </div>
+                <div class="vehicle-detail-item">
+                    <span class="vehicle-detail-label">Registering Authority:</span>
+                    <span class="vehicle-detail-value" id="registeringAuthority">RTO Chandrapur, Maharashtra</span>
+                </div>
+                <div class="vehicle-detail-item">
+                    <span class="vehicle-detail-label">Fitness Valid Upto:</span>
+                    <span class="vehicle-detail-value" id="fitnessValidUpto">21st Nov 2025</span>
+                </div>
+                <div class="vehicle-detail-item">
+                    <span class="vehicle-detail-label">Vehicle Class:</span>
+                    <span class="vehicle-detail-value" id="vehicleClass">Goods Carrier (HGV)</span>
+                </div>
+                <div class="vehicle-detail-item">
+                    <span class="vehicle-detail-label">Tax Valid Upto:</span>
+                    <span class="vehicle-detail-value" id="taxValidUpto">21st Nov 2025</span>
+                </div>
+                <div class="vehicle-detail-item">
+                    <span class="vehicle-detail-label">Fuel Type:</span>
+                    <span class="vehicle-detail-value" id="fuelType">Diesel</span>
+                </div>
+                <div class="vehicle-detail-item">
+                    <span class="vehicle-detail-label">Insurance Valid Upto:</span>
+                    <span class="vehicle-detail-value" id="insuranceValidUpto">21st Nov 2025</span>
+                </div>
+                <div class="vehicle-detail-item">
+                    <span class="vehicle-detail-label">Emission Norm:</span>
+                    <span class="vehicle-detail-value" id="emissionNorm">Bharat Stage IV</span>
+                </div>
+                <div class="vehicle-detail-item">
+                    <span class="vehicle-detail-label">PUCC Valid Upto:</span>
+                    <span class="vehicle-detail-value" id="puccValidUpto">21st Nov 2025</span>
+                </div>
+                <div class="vehicle-detail-item">
+                    <span class="vehicle-detail-label">Vehicle Age:</span>
+                    <span class="vehicle-detail-value" id="vehicleAge">6 Year, 4 Months, 2 Days</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Upload Invoice Modal -->
+<div class="modal-overlay-upload-invoice" id="uploadInvoiceModalOverlay" style="display: none;">
+    <div class="upload-invoice-modal-content">
+        <div class="upload-invoice-modal-header">
+            <h2>Add Invoice</h2>
+            <button class="close-button" id="closeUploadInvoiceModal">&times;</button>
+        </div>
+        <div class="upload-invoice-modal-body">
+            <div class="upload-sections">
+                <div class="upload-section">
+                    <h3>MATERIAL INVOICE</h3>
+                    <div class="upload-area" id="materialInvoiceArea" data-type="material">
+                        <div class="upload-placeholder" id="materialPlaceholder">
+                            <div class="upload-icon">
+                                <img src="/assets/documentUpload.svg" alt="Upload Icon">
+                            </div>
+                            <p>Drag & Drop files here<br><span>or</span><br><a href="#" class="browse-link">Browse Files</a></p>
+                        </div>
+                        <div class="upload-preview" id="materialPreview" style="display: none;">
+                            <div class="preview-image" id="materialPreviewImage"></div>
+                        </div>
+                    </div>
+                    <input type="file" id="materialFileInput" accept="image/*,.pdf,.doc,.docx" style="display: none;">
+                    <div class="file-info-row" id="materialFileInfoRow" style="display: none;">
+                        <div class="file-name" id="materialFileName">Material Invoice</div>
+                        <button class="remove-file" id="removeMaterialFile">&times;</button>
+                    </div>
+                </div>
+                
+                <div class="upload-section">
+                    <h3>E-WAY BILL</h3>
+                    <div class="upload-area" id="ewayBillArea" data-type="eway">
+                        <div class="upload-placeholder" id="ewayPlaceholder">
+                            <div class="upload-icon">
+                                <img src="/assets/documentUpload.svg" alt="Upload Icon">
+                            </div>
+                            <p>Drag & Drop files here<br><span>or</span><br><a href="#" class="browse-link">Browse Files</a></p>
+                        </div>
+                        <div class="upload-preview" id="ewayPreview" style="display: none;">
+                            <div class="preview-image" id="ewayPreviewImage"></div>
+                        </div>
+                    </div>
+                    <input type="file" id="ewayFileInput" accept="image/*,.pdf,.doc,.docx" style="display: none;">
+                    <div class="file-info-row" id="ewayFileInfoRow" style="display: none;">
+                        <div class="file-name" id="ewayFileName">E-Way Bill</div>
+                        <button class="remove-file" id="removeEwayFile">&times;</button>
+                    </div>
+                </div>
+                
+                <div class="upload-section">
+                    <h3>OTHER DOCUMENTS</h3>
+                    <div class="upload-area" id="otherDocsArea" data-type="other">
+                        <div class="upload-placeholder" id="otherPlaceholder">
+                            <div class="upload-icon">
+                                <img src="/assets/documentUpload.svg" alt="Upload Icon">
+                            </div>
+                            <p>Drag & Drop files here<br><span>or</span><br><a href="#" class="browse-link">Browse Files</a></p>
+                        </div>
+                        <div class="upload-preview" id="otherPreview" style="display: none;">
+                            <div class="preview-image" id="otherPreviewImage"></div>
+                        </div>
+                    </div>
+                    <input type="file" id="otherFileInput" accept="image/*,.pdf,.doc,.docx" style="display: none;">
+                    <div class="file-info-row" id="otherFileInfoRow" style="display: none;">
+                        <div class="file-name" id="otherFileName">Other Documents</div>
+                        <button class="remove-file" id="removeOtherFile">&times;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="upload-invoice-modal-footer">
+            <button class="cancel-upload-btn" id="cancelUploadInvoice">Cancel</button>
+            <button class="save-invoice-btn" id="saveUploadInvoice">Save Invoice</button>
+        </div>
+    </div>
+</div>
+
+<!-- View Documents Modal -->
+<div class="modal-overlay-view-documents" id="viewDocumentsModalOverlay" style="display: none;">
+    <div class="view-documents-modal-content">
+        <div class="view-documents-modal-header">
+            <h2>View Documents</h2>
+            <button class="close-button" id="closeViewDocuments">&times;</button>
+        </div>
+        <div class="view-documents-modal-body">
+            <div class="documents-sections" id="documentsContainer">
+                <!-- Documents will be populated here -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- View POD Modal -->
+<div class="modal-overlay-view-pod" id="viewPodModalOverlay" style="display: none;">
+    <div class="view-pod-modal-content">
+        <div class="view-pod-modal-header">
+            <h2>View POD</h2>
+            <button class="close-button" id="closeViewPod">&times;</button>
+        </div>
+        <div class="view-pod-modal-body">
+            <div class="documents-sections" id="podContainer">
+                <!-- POD documents will be populated here -->
+            </div>
+        </div>
+    </div>
+</div>

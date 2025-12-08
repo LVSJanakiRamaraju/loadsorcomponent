@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loadsor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="test_styles.css">
+</head>
+<body>
+    <!-- Header Component -->
+    <div id="header-component"></div>
+    
+    <!-- Empty State Component -->
+    <div id="empty-state-component"></div>
+    
+    <!-- Load Posts Page Component -->
+    <div id="load-posts-component"></div>
+    
+    <!-- Filter Modal Component -->
+    <div id="filter-modal-component"></div>
+    
+    <!-- All Modals Component -->
+    <div id="modals-component"></div>
+
+    <!-- Component Loader Script -->
+    <script>
+        // Function to load HTML components synchronously
+        function loadComponent(componentId, filePath) {
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', filePath, false); // false makes it synchronous
+            xhr.send();
+            
+            if (xhr.status === 200) {
+                document.getElementById(componentId).innerHTML = xhr.responseText;
+            } else {
+                console.error(`Failed to load component ${componentId}: ${xhr.status}`);
+            }
+        }
+
+        // Load all components synchronously
+        function loadAllComponents() {
+            console.log('Starting to load components...');
+            loadComponent('header-component', 'components/header.html');
+            loadComponent('empty-state-component', 'components/empty-state.html');
+            loadComponent('load-posts-component', 'components/load-posts-page.html');
+            loadComponent('filter-modal-component', 'components/filter-modal.html');
+            loadComponent('modals-component', 'components/modals.html');
+            
+            console.log('All components loaded successfully');
+            
+            // Check if elements exist after loading
+            console.log('Checking elements after component loading:');
+            console.log('create-load-post-button:', document.querySelector('.create-load-post-button'));
+            console.log('modalOverlay:', document.getElementById('modalOverlay'));
+            console.log('closeModal:', document.getElementById('closeModal'));
+            
+            // Now load the main script after all components are loaded
+            // Since script.js is wrapped in DOMContentLoaded, we need to execute it directly
+            fetch('script.js')
+                .then(response => response.text())
+                .then(scriptContent => {
+                    console.log('Script.js content fetched, executing...');
+                    
+                    // Remove the DOMContentLoaded wrapper
+                    let modifiedScript = scriptContent;
+                    
+                    // Remove the opening DOMContentLoaded wrapper
+                    modifiedScript = modifiedScript.replace(
+                        /\/\/\s*Wrap DOM element selection in DOMContentLoaded to ensure elements exist\s*\ndocument\.addEventListener\('DOMContentLoaded',\s*function\(\)\s*\{\s*\n/,
+                        ''
+                    );
+                    
+                    // Remove the closing wrapper
+                    modifiedScript = modifiedScript.replace(
+                        /\n\}\);\s*\/\/\s*End of DOMContentLoaded\s*$/,
+                        ''
+                    );
+                    
+                    // Add null checks for common problematic elements
+                    modifiedScript = modifiedScript.replace(
+                        /(\w+)\.addEventListener\(/g,
+                        '$1 && $1.addEventListener('
+                    );
+                    
+                    console.log('Script modified, executing...');
+                    
+                    // Execute the modified script
+                    try {
+                        eval(modifiedScript);
+                        console.log('Script.js executed successfully after components loaded');
+                        
+                        // Initialize custom dropdowns after script.js is loaded
+                        initializeCustomDropdowns();
+                    } catch (error) {
+                        console.error('Error executing script.js:', error);
+                        // Still try to initialize dropdowns even if script has errors
+                        initializeCustomDropdowns();
+                    }
+                })
+                .catch(error => {
+                    console.error('Failed to fetch script.js:', error);
+                });
+        }
+
+        // Custom Dropdown Initialization Function
+        function initializeCustomDropdowns() {
+            console.log('=== Starting custom dropdown initialization ===');
+            
+            // Wait a bit to ensure DOM is fully ready
+            setTimeout(() => {
+                console.log('Initializing custom dropdowns after timeout...');
+                
+                // Check if modal is present
+                const modal = document.getElementById('modalOverlay');
+                console.log('Modal found:', modal);
+                
+                // Create virtual input elements for each dropdown to maintain compatibility
+                const dropdownTargets = [
+                    'reportingTime', 'biddingHrs', 'biddingMins', 'organizationName', 
+                    'preferredTransporterGroup', 'material', 'loadWeight', 'truckType', 
+                    'paymentTerms', 'extendBiddingHrs', 'extendBiddingMins', 
+                    'filterStatus', 'filterMaterial', 'filterScheduleType'
+                ];
+                
+                // Create virtual select elements for compatibility with existing script.js
+                dropdownTargets.forEach(targetId => {
+                    if (!document.getElementById(targetId)) {
+                        const virtualSelect = document.createElement('select');
+                        virtualSelect.id = targetId;
+                        virtualSelect.style.display = 'none';
+                        virtualSelect.value = ''; // Ensure empty value
+                        document.body.appendChild(virtualSelect);
+                        console.log('Created virtual select for:', targetId);
+                    }
+                });
+                
+                // Clear any existing values in virtual selects to prevent auto-initialization
+                dropdownTargets.forEach(targetId => {
+                    const existingSelect = document.getElementById(targetId);
+                    if (existingSelect) {
+                        existingSelect.value = '';
+                    }
+                });
+                
+                // Initialize all custom dropdowns
+                const customDropdowns = document.querySelectorAll('.custom-dropdown');
+                console.log(`Found ${customDropdowns.length} custom dropdowns`);
+                console.log('Custom dropdowns:', customDropdowns);
+                
+                if (customDropdowns.length === 0) {
+                    console.error('No custom dropdowns found! Checking if modal content is loaded...');
+                    const modalContent = document.querySelector('.modal-content');
+                    console.log('Modal content found:', modalContent);
+                    if (modalContent) {
+                        console.log('Modal content HTML:', modalContent.innerHTML.substring(0, 500));
+                    }
+                    return;
+                }
+            
+            customDropdowns.forEach(dropdown => {
+                const header = dropdown.querySelector('.dropdown-header');
+                const list = dropdown.querySelector('.dropdown-list');
+                const arrow = dropdown.querySelector('.dropdown-arrow');
+                const selectedValue = dropdown.querySelector('.selected-value');
+                const items = dropdown.querySelectorAll('.dropdown-item');
+                const targetSelect = dropdown.dataset.target;
+                const virtualSelect = document.getElementById(targetSelect);
+                
+                // Populate virtual select with options from dropdown items
+                if (virtualSelect && items.length > 0) {
+                    virtualSelect.innerHTML = '';
+                    // Add empty option first
+                    const emptyOption = document.createElement('option');
+                    emptyOption.value = '';
+                    emptyOption.textContent = '';
+                    virtualSelect.appendChild(emptyOption);
+                    
+                    items.forEach(item => {
+                        const option = document.createElement('option');
+                        option.value = item.dataset.value || '';
+                        option.textContent = item.textContent;
+                        virtualSelect.appendChild(option);
+                    });
+                    
+                    // Set default empty value
+                    virtualSelect.value = '';
+                    console.log(`Virtual select ${targetSelect} populated with ${items.length} options`);
+                }
+                
+                let isOpen = false;
+                
+                // Toggle dropdown
+                if (header) {
+                    header.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        console.log('Dropdown header clicked:', targetSelect);
+                        
+                        // Close all other dropdowns
+                        customDropdowns.forEach(otherDropdown => {
+                            if (otherDropdown !== dropdown) {
+                                const otherList = otherDropdown.querySelector('.dropdown-list');
+                                const otherArrow = otherDropdown.querySelector('.dropdown-arrow');
+                                if (otherList) otherList.classList.remove('open');
+                                if (otherArrow) otherArrow.classList.remove('rotated');
+                            }
+                        });
+                        
+                        isOpen = !isOpen;
+                        console.log('Toggling dropdown open state to:', isOpen);
+                        
+                        if (list) {
+                            list.classList.toggle('open', isOpen);
+                            console.log('Dropdown list classes after toggle:', list.className);
+                        } else {
+                            console.error('Dropdown list not found for:', targetSelect);
+                        }
+                        
+                        if (arrow) {
+                            arrow.classList.toggle('rotated', isOpen);
+                        } else {
+                            console.log('Dropdown arrow not found for:', targetSelect);
+                        }
+                    });
+                } else {
+                    console.error('Dropdown header not found for:', targetSelect);
+                }
+                
+                // Handle item selection
+                items.forEach(item => {
+                    item.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        
+                        // Remove selected class from all items
+                        items.forEach(i => i.classList.remove('selected'));
+                        
+                        // Add selected class to clicked item
+                        item.classList.add('selected');
+                        
+                        // Update selected value display
+                        if (selectedValue) {
+                            selectedValue.textContent = item.textContent;
+                        }
+                        
+                        // Update header styling based on whether a value is selected
+                        if (header) {
+                            if (item.dataset.value && item.dataset.value !== '') {
+                                header.classList.add('has-value');
+                            } else {
+                                header.classList.remove('has-value');
+                            }
+                        }
+                        
+                        // Update the virtual select
+                        if (virtualSelect) {
+                            virtualSelect.value = item.dataset.value;
+                            console.log(`Updated virtual select ${targetSelect} to value: ${item.dataset.value}`);
+                            // Trigger change event for any existing listeners
+                            const changeEvent = new Event('change', { bubbles: true });
+                            virtualSelect.dispatchEvent(changeEvent);
+                        } else {
+                            console.error(`Virtual select not found for ${targetSelect}`);
+                        }
+                        
+                        // Handle special cases for payment terms (compatibility with existing logic)
+                        if (targetSelect === 'paymentTerms') {
+                            const conditionalPaymentTerms = document.querySelector('.conditional-payment-terms');
+                            if (conditionalPaymentTerms) {
+                                if (item.dataset.value === 'other') {
+                                    conditionalPaymentTerms.style.display = 'flex';
+                                } else {
+                                    conditionalPaymentTerms.style.display = 'none';
+                                }
+                            }
+                        }
+                        
+                        // Close dropdown
+                        isOpen = false;
+                        if (list) list.classList.remove('open');
+                        if (arrow) arrow.classList.remove('rotated');
+                    });
+                });
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', (e) => {
+                customDropdowns.forEach(dropdown => {
+                    const list = dropdown.querySelector('.dropdown-list');
+                    const arrow = dropdown.querySelector('.dropdown-arrow');
+                    
+                    if (!dropdown.contains(e.target)) {
+                        if (list) list.classList.remove('open');
+                        if (arrow) arrow.classList.remove('rotated');
+                    }
+                });
+            });
+            
+            console.log('Custom dropdowns initialized successfully');
+            }, 500); // End of setTimeout
+        }
+
+        // Load components when DOM is ready
+        document.addEventListener('DOMContentLoaded', loadAllComponents);
+    </script>
+</body>
+</html>
