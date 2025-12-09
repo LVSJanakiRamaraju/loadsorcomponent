@@ -6001,6 +6001,67 @@ textarea {
   }
 }
 
+/* Tablet responsive for modal forms */
+@media (max-width: 768px) {
+  .modal-content {
+    max-width: 95%;
+    margin: 10px;
+    padding: 20px 16px;
+  }
+  
+  .form-row {
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+  
+  .form-group {
+    width: 100%;
+    flex: 1 1 100%;
+  }
+  
+  /* Toggle buttons on tablet */
+  .toggle-buttons {
+    gap: 6px;
+    flex-wrap: wrap;
+    height: auto;
+  }
+  
+  .toggle-button {
+    padding: 8px 12px;
+    font-size: 12px;
+    height: 36px;
+  }
+  
+  /* Dynamic sections mobile stacking */
+  .one-stop-fields,
+  .bulk-load-fields,
+  .multiple-stops-fields {
+    flex-direction: column;
+  }
+  
+  .loading-points-container {
+    flex-direction: column;
+    gap: 14px;
+  }
+  
+  .loading-points-container .form-group {
+    width: 100%;
+    min-width: auto;
+  }
+  
+  .add-more-icon,
+  .remove-more-icon {
+    align-self: center;
+    margin: 6px 0;
+  }
+  
+  .add-more-address-button {
+    width: 100%;
+    margin-top: 10px;
+  }
+}
+
 @media (max-width: 480px) {
   .modal-content {
     margin: 5px;
@@ -6026,6 +6087,88 @@ textarea {
   .create-button {
     width: 100%;
     min-width: 120px;
+  }
+  
+  /* Toggle buttons responsive on mobile */
+  .toggle-buttons {
+    flex-wrap: wrap;
+    gap: 8px;
+    height: auto;
+  }
+  
+  /* Form row stacking for mobile */
+  .form-row {
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  
+  /* Ensure all form groups take full width on mobile */
+  .form-group {
+    width: 100%;
+    flex: 1 1 100%;
+  }
+  
+  /* Dynamic field sections mobile responsive */
+  .dynamic-field-section {
+    display: block;
+    width: 100%;
+  }
+  
+  .one-stop-fields,
+  .bulk-load-fields,
+  .multiple-stops-fields {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  /* Multiple stops specific mobile styles */
+  .loading-points-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+  }
+  
+  .loading-points-container .form-group {
+    width: 100%;
+    min-width: auto;
+  }
+  
+  .add-more-icon,
+  .remove-more-icon {
+    width: 40px;
+    height: 40px;
+    align-self: center;
+    margin: 8px 0;
+  }
+  
+  .add-more-address-button {
+    width: 100%;
+    padding: 10px 15px;
+    font-size: 13px;
+    margin-top: 12px;
+  }
+  
+  /* Material row mobile adjustments */
+  .material-row .form-group {
+    width: 100%;
+  }
+  
+  /* Truck row mobile adjustments */
+  .truck-row .form-group {
+    width: 100%;
+  }
+  
+  /* Conditional payment terms full width */
+  .conditional-payment-terms {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .conditional-payment-terms .form-group {
+    width: 100%;
   }
 }
 
