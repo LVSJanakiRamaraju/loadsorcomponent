@@ -129,6 +129,13 @@ header {
   box-sizing: border-box;
 }
 
+@media (max-width: 768px) {
+  header {
+    padding: 12px 16px;
+    height: 70px;
+  }
+}
+
 .logo {
   display: flex;
   align-items: center;
@@ -156,6 +163,12 @@ nav {
   height: 37px;
   justify-content: center;
   max-width: 682px;
+}
+
+@media (max-width: 768px) {
+  nav {
+    display: none !important;
+  }
 }
 
 nav>ul {
@@ -224,6 +237,14 @@ nav>ul>li>a i {
   min-width: 357px;
   height: 36px;
   flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .user-actions {
+    gap: 12px;
+    min-width: auto;
+    justify-content: center;
+  }
 }
 
 .notification-icon {
@@ -431,6 +452,14 @@ main {
   box-sizing: border-box;
   overflow: auto;
   /* allow content scroll within main */
+}
+
+@media (max-width: 768px) {
+  main {
+    min-height: auto;
+    margin-top: 70px;
+    padding: 0 12px 40px;
+  }
 }
 
 .no-load-posts {
@@ -1860,6 +1889,28 @@ textarea {
   box-sizing: border-box;
 }
 
+/* Mobile - Hide filter sidebar by default */
+@media (max-width: 768px) {
+  .load-posts-page {
+    flex-direction: column;
+    padding: 16px;
+    gap: 16px;
+    margin-top: 80px;
+  }
+
+  .filter-sidebar {
+    display: none !important;
+  }
+
+  .main-load-content {
+    flex-grow: 1;
+  }
+
+  .filter-icon {
+    display: flex !important;
+  }
+}
+
 /* Filter Sidebar - Redesigned to match Figma */
 .filter-sidebar {
   width: 304px;
@@ -1874,6 +1925,25 @@ textarea {
   gap: 0px;
   /* height: min-content; */
   max-height: calc(100vh - 170px);
+}
+
+@media (max-width: 768px) {
+  .filter-sidebar {
+    display: none !important;
+    position: fixed;
+    top: 80px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    max-width: 100%;
+    border-radius: 0;
+    z-index: 999;
+  }
+
+  .filter-sidebar.active {
+    display: flex !important;
+  }
 }
 
 .filter-header {
@@ -2174,6 +2244,14 @@ textarea {
   align-items: start;
 }
 
+@media (max-width: 768px) {
+  .load-posts-list {
+    max-height: auto;
+    padding-right: 0;
+    gap: 12px;
+  }
+}
+
 .bids-table .bid-row {
   display: grid;
   /* Change to grid to control individual cells directly */
@@ -2218,6 +2296,12 @@ textarea {
   width: 100%;
 }
 
+@media (max-width: 768px) {
+  .main-load-content {
+    gap: 12px;
+  }
+}
+
 /* Tabs and Search Container */
 .tabs-and-search-container {
   display: flex;
@@ -2228,6 +2312,15 @@ textarea {
   height: 37px;
   margin-bottom: 20px;
   gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .tabs-and-search-container {
+    flex-wrap: wrap;
+    height: auto;
+    margin-bottom: 12px;
+    gap: 12px;
+  }
 }
 
 .tabs {
@@ -2241,6 +2334,12 @@ textarea {
   border-radius: 0;
   box-shadow: none;
   flex-shrink: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.tabs::-webkit-scrollbar {
+  height: 0;
 }
 
 .tab-button {
@@ -2264,6 +2363,8 @@ textarea {
   border-radius: 0;
   transition: all 0.2s ease;
   position: relative;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .tab-button.active {
@@ -2289,6 +2390,19 @@ textarea {
   color: #519e8a;
 }
 
+@media (max-width: 768px) {
+  .tabs {
+    gap: 16px;
+    padding: 0 4px;
+  }
+
+  .tab-button {
+    font-size: 12px;
+    padding: 8px 0;
+    height: 32px;
+  }
+}
+
 .search-and-actions {
   display: flex;
   flex-direction: row;
@@ -2298,6 +2412,14 @@ textarea {
   height: 30px;
   flex-shrink: 0;
   min-width: 356px;
+}
+
+@media (max-width: 768px) {
+  .search-and-actions {
+    min-width: 100%;
+    gap: 12px;
+    height: auto;
+  }
 }
 
 .search-bar {
@@ -2313,6 +2435,14 @@ textarea {
   border-radius: 8px;
   box-shadow: none;
   flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .search-bar {
+    flex: 1;
+    width: 100%;
+    height: 36px;
+  }
 }
 
 .search-bar input {
@@ -2394,6 +2524,12 @@ textarea {
 .filter-icon i {
   font-size: 16px;
   color: #6c757d;
+}
+
+@media (max-width: 768px) {
+  .filter-icon {
+    display: flex !important;
+  }
 }
 
 /* Filter Modal Overlay for smaller screens */
@@ -2962,6 +3098,15 @@ textarea {
   border-bottom-right-radius: 8px;
 }
 
+@media (max-width: 768px) {
+  .action-button {
+    font-size: 10px;
+    padding: 6px 8px;
+    height: 28px;
+    width: auto;
+  }
+}
+
 /* Action dividers are now handled by button borders */
 
 /* Action buttons container positioned over bidding section */
@@ -2992,12 +3137,25 @@ textarea {
   position: relative;
 }
 
+@media (max-width: 768px) {
+  .load-post-card {
+    border-radius: 8px;
+  }
+}
+
 .card-body {
   display: flex;
   flex-direction: column;
   gap: 12px;
   overflow: visible;
   padding: 16px;
+}
+
+@media (max-width: 768px) {
+  .card-body {
+    padding: 12px;
+    gap: 10px;
+  }
 }
 
 /* Responsive card layout: tablet and desktop */
@@ -3380,6 +3538,12 @@ textarea {
   overflow: visible;
 }
 
+@media (max-width: 768px) {
+  .location-path {
+    gap: 12px;
+  }
+}
+
 .location-line {
   display: flex;
   align-items: flex-start;
@@ -3449,6 +3613,13 @@ textarea {
   color: #667085;
 }
 
+@media (max-width: 768px) {
+  .location-label {
+    font-size: 11px;
+    line-height: 14px;
+  }
+}
+
 .location-text {
   font-family: "Inter", sans-serif;
   font-weight: 500;
@@ -3458,6 +3629,13 @@ textarea {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .location-text {
+    font-size: 13px;
+    line-height: 18px;
+  }
 }
 
 /* Multiple Locations Tooltip Styles */
@@ -3601,6 +3779,18 @@ textarea {
   overflow: visible;
 }
 
+@media (max-width: 768px) {
+  .details-section {
+    border-left: none;
+    border-right: none;
+    padding-top: 12px;
+    padding-left: 0;
+    padding-bottom: 12px;
+    gap: 12px;
+    border-bottom: 1px solid #e4e7ec;
+  }
+}
+
 .confirmed-info-section {
   display: flex;
   flex-direction: column;
@@ -3640,6 +3830,13 @@ textarea {
   line-height: 100%;
   margin-bottom: 0px;
   gap: 12px;
+}
+
+@media (max-width: 768px) {
+  .detail-item {
+    font-size: 13px;
+    gap: 8px;
+  }
 }
 
 .detail-item.full-width {
@@ -3683,6 +3880,14 @@ textarea {
   min-height: 240px;
 }
 
+@media (max-width: 768px) {
+  .bidding-section {
+    min-height: auto;
+    gap: 10px;
+    padding: 0;
+  }
+}
+
 .bidding-header {
   display: flex;
   justify-content: space-between;
@@ -3694,6 +3899,13 @@ textarea {
   transition: background 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   width: 100%;
   box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .bidding-header {
+    padding: 8px;
+    border-radius: 6px;
+  }
 }
 
 .bidding-time-info {
@@ -3767,6 +3979,21 @@ textarea {
   color: #667085;
 }
 
+@media (max-width: 768px) {
+  .bid-level {
+    padding: 12px 0;
+  }
+
+  .bid-level-label {
+    font-size: 11px;
+    margin-bottom: 4px;
+  }
+
+  .bid-level-value {
+    font-size: 14px;
+  }
+}
+
 /* Total bids section */
 .total-bids {
   text-align: left;
@@ -3818,6 +4045,14 @@ textarea {
   font-size: 14px;
   line-height: 20px;
   color: #3c4044;
+}
+
+@media (max-width: 768px) {
+  .description-section {
+    padding: 12px 0;
+    border-top: none;
+    font-size: 13px;
+  }
 }
 
 .description-label {
